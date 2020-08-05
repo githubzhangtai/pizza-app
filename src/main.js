@@ -9,6 +9,20 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   routes,
   mode:'history',
+  // 滚动
+  scrollBehavior(to,from,savedPosition){
+      // return {x:0 , y:100}
+
+      // return {selector:'.btn'}
+
+      if (savedPosition){
+        return savedPosition
+      }else {
+        return {x:0 , y:0}
+      }
+
+  }
+
 })
 
 // 全局守卫
