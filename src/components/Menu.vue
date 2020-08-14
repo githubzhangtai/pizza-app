@@ -30,7 +30,7 @@
     <div class="col-sm-12 col-md-4">
         <div v-if="baskets.length > 0">
           <table class="table">
-            <thead class="thead-default">
+            <thead class="table-default">
             <tr>
               <th>数量</th>
               <th>品种</th>
