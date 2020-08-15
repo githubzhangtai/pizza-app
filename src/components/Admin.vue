@@ -57,7 +57,7 @@ import NewPizza from './NewPizza'
         },
         methods:{
           deleteData(item){
-            fetch("https://pizza-app-ffbb3.firebaseio.com/menu/"+item.id+"/.json",{
+            fetch("https://pizza-app-ffbb3.firebaseio.com/menu/"+item.id+".json",{
                 method:"DELETE",
                 headers:{
                   'Content-type':'application/json'

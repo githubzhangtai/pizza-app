@@ -50,7 +50,7 @@
             </tbody>
           </table>
           <p>总价:{{total}} RMB</p>
-          <button class="btn btn-success btn-block">提交</button>
+          <button  class="btn btn-success btn-block">提交</button>
         </div>
         <div v-else>
           {{basketText}}
@@ -66,50 +66,7 @@
           return{
             baskets:[],
             basketText:"购物车里没有任何商品",
-            getMenuItems:{
-              1:{
-                'name':'榴莲pizza',
-                'description':'这是喜欢吃榴莲朋友的最佳选择',
-                'options':[
-                  {
-                    'size':9,
-                    'price':49
-                  },
-                  {
-                    'size':12,
-                    'price':48
-                  }
-                ]
-              },
-              2:{
-                'name':'芝士pizza',
-                'description':'这是喜欢吃芝士pizza朋友的最佳选择',
-                'options':[
-                  {
-                    'size':10,
-                    'price':58
-                  },
-                  {
-                    'size':10,
-                    'price':38
-                  }
-                ]
-              },
-              3:{
-                'name':'夏威夷pizza',
-                'description':'这是喜欢吃夏威夷pizza朋友的最佳选择',
-                'options':[
-                  {
-                    'size':17,
-                    'price':89
-                  },
-                  {
-                    'size':38,
-                    'price':79
-                  }
-                ]
-              }
-            }
+            getMenuItems:{}
           }
         },
       computed:{
@@ -121,6 +78,9 @@
           }
           return totalCost
         }
+      },
+      created() {
+        this.fetchData();
       },
       methods:{
         addToBasket(item, option){
@@ -156,6 +116,15 @@
         },
         removeFromBasket(item){
           this.baskets.splice(this.baskets.indexOf(item),1)
+        },
+        fetchData() {
+          fetch("https://pizza-app-ffbb3.firebaseio.com/menu.json")
+            .then(res => {
+              return res.json()
+            })
+            .then(data => {
+              this.getMenuItems = data
+            })
         }
       }
     }

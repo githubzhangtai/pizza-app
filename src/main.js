@@ -8,6 +8,9 @@ Vue.use(VueRouter)
 
 axios.defaults.baseURL =  'https://pizza-app-ffbb3.firebaseio.com/'
 
+// 配置Vue原型 (在任何组件中都可以正常使用axios)
+Vue.prototype.http = axios;
+
 const router = new VueRouter({
   routes,
   mode:'history',
