@@ -14,8 +14,13 @@
         <li><router-link :to="{name:'aboutLink'}" class="nav-link">关于我们</router-link></li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        <li><router-link to="/login" class="nav-link">登录</router-link></li>
-        <li><router-link to="/register" class="nav-link">注册</router-link></li>
+        <li><router-link to="/login" v-show="!isLogin" class="nav-link">登录</router-link></li>
+        <li class="nav-link">{{currentUser}}</li>
+         <li><router-link :to="{name:'loginLink'}" v-show="isLogin" class="nav-link" @click="loginOut">[退出]</router-link></li>
+        <!--<li>-->
+          <!--<span v-show="isLogin" class="nav-link" @click="loginOut">[退出]</span>-->
+        <!--</li>-->
+        <li><router-link v-show="!isLogin" to="/register" class="nav-link">注册</router-link></li>
       </ul>
     </nav>
   </header>
@@ -29,6 +34,14 @@
       data(){
         return{
           // homeLink:'/',
+        }
+      },
+      computed:{
+        currentUser(){
+          return this.$store.getters.currentUser
+        },
+        isLogin(){
+          return this.$store.getters.isLogin
         }
       }
     }

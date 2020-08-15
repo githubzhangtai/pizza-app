@@ -66,10 +66,16 @@
           return{
             baskets:[],
             basketText:"购物车里没有任何商品",
-            getMenuItems:{}
+            // getMenuItems:{}
           }
         },
       computed:{
+        getMenuItems(){
+          // 在 vuex 中获取数据
+          // return this.$store.state.menuItems
+          // 除了上一行的方式外，还可以使用 getters 获取数据
+          return this.$store.getters.getMenuItems
+        },
         total(){
           let totalCost = 0
           for (let index in this.baskets) {
@@ -118,13 +124,18 @@
           this.baskets.splice(this.baskets.indexOf(item),1)
         },
         fetchData() {
-          fetch("https://pizza-app-ffbb3.firebaseio.com/menu.json")
-            .then(res => {
-              return res.json()
-            })
-            .then(data => {
-              this.getMenuItems = data
-            })
+          // 请求数据
+          // fetch("https://pizza-app-ffbb3.firebaseio.com/menu.json")
+          //   .then(res => {
+          //     return res.json()
+          //   })
+          //   .then(data => {
+          //     this.getMenuItems = data
+          //   })
+
+          // 讲请求的数据存储到 Vuex 中
+          this.http.get("menu.json")
+            .then(res => this.$store.commit("setMenuItems",res.data))
         }
       }
     }

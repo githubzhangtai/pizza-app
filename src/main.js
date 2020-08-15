@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 import { routes } from "./router";
 import axios from 'axios'
+import { store } from './store/store.js'
+
 
 Vue.use(VueRouter)
 
@@ -51,5 +53,6 @@ const router = new VueRouter({
 new Vue({
   el: '#app',
   router,
+  store,
   render: h => h(App)
 })

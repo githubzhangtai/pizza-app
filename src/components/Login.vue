@@ -39,6 +39,9 @@ import axios from 'axios'
         password:''
       }
     },
+    beforeRouteEnter: (to,from,next) => {
+        next(vm => vm.$store.dispatch("setUser",null))
+    },
     methods:{
       onSubmit(){
         axios.get('/user.json').then(res =>{
@@ -58,9 +61,11 @@ import axios from 'axios'
 
           //判断 result 的长度是否大于0
           if(result != null && result.length > 0){
+            this.$store.dispatch("setUser",result[0].email)
             this.$router.push({name:'homeLink'})
           }else {
             alert("账号或密码错误！")
+            this.$store.dispatch("setUser",null)
           }
         })
       }
